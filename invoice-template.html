@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            background-color: #f0f4f8;
+        }
+        .invoice-container {
+            max-width: 900px;
+            margin: 40px auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+           
+        }
+        h1 {
+            text-align: center;
+            font-size: 26px;
+            margin-bottom: 25px;
+            color: #68C094;
+        }
+        p {
+            font-size: 14px;
+            color: #555;
+            text-align: right;
+            margin-bottom: 15px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table thead {
+            background-color: #68C094;
+            color: rgb(0, 0, 0);
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid black; /* Adding border to each cell */
+        }
+        th {
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+        td {
+            font-size: 14px;
+            color: #333;
+            background-color: #E5E5E5;
+        }
+        tr:nth-child(even) {
+            background-color: #f1f9ff;
+        }
+        .total {
+            font-size: 20px;
+            color: #000000;
+            font-weight: bold;
+            text-align: right;
+            margin-top: 20px;
+        }
+        #tot {
+            color: #68C094;
+        }
+        .thank-you {
+            text-align: center;
+            font-style: italic;
+            color: #444;
+            margin-top: 30px;
+            font-size: 16px;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="invoice-container">
+        <h1>Invoice</h1>
+        <p>Date: {{date}}</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{items}}
+            </tbody>
+        </table>
+        <div class="total">
+            Total Amount: <span id="tot">{{totalAmount}}</span>
+        </div>
+        <p class="thank-you">Thank you for your purchase! 😊</p>
+    </div>
+</body>
+</html>

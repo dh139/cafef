@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Cafe Menu</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <style>
+        /* Global styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+/* navbar */
+
+.navbar {
+            background-color: #68C094; /* Dark green */
+            color: #fff; /* Light beige */
+            padding: 6px 30px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar .logo {
+            font-size: 26px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            flex-shrink: 0;
+        }
+
+        .navbar .nav-links {
+            list-style: none;
+            display: flex; /* Use flex for horizontal layout */
+            gap: 30px; /* Increased gap for better spacing */
+            align-items: center;
+        }
+
+        .navbar .nav-links li {
+            display: inline;
+        }
+
+        .navbar .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .navbar .nav-links a:hover {
+            color: #e0b696; /* Lighten on hover */
+        }
+
+        /* Hamburger Icon */
+        .navbar .hamburger {
+            display: none; /* Hidden by default */
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .navbar .hamburger div {
+            height: 3px;
+            width: 25px;
+            background: #ffffff;
+            transition: all 0.3s;
+        }
+
+        /* When the nav is open */
+        .navbar .nav-links.active {
+            display: flex;
+        }
+
+      
+        .change .bar1 {
+    transform: rotate(-45deg) translate(-5px, 5px);
+}
+
+.change .bar2 {
+    opacity: 0;
+}
+
+.change .bar3 {
+    transform: rotate(45deg) translate(-5px, -5px);
+}
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 10px 20px;
+            }
+
+            .navbar .nav-links {
+                display: none; /* Hide nav links by default */
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                right: 0;
+                background-color: #68C094;
+                padding: 20px;
+                width: 100%;
+                text-align: center;
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            }
+
+            .navbar .nav-links.active {
+                display: flex; /* Show links when hamburger is clicked */
+            }
+
+            .navbar .hamburger {
+                display: flex; /* Show hamburger icon */
+            }
+
+            .navbar .hamburger div {
+                background: #ffffff;
+            }
+
+            .navbar .logo {
+                font-size: 24px;
+            }
+
+            .navbar .nav-links li {
+                margin-bottom: 20px; /* More space between links */
+            }
+
+            .navbar .nav-links a {
+                font-size: 20px;
+            }
+        }
+
+
+        h1, h2 {
+            color: #333;
+            text-align: center;
+        }
+
+        /* Admin form styling */
+        #item-form {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #item-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        #item-form input[type="text"], #item-form input[type="number"], #item-form input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+
+        #item-form button {
+            width: 100%;
+            padding: 12px;
+            background-color: #48e798;
+            color: #fff;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #item-form button:hover {
+            background-color: #218838;
+        }
+
+        /* Styling the list of existing menu items */
+        #items-list {
+            margin-top: 30px;
+            max-width: 800px;
+            margin: 30px auto;
+        }
+
+        .menu-item {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-item img {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .menu-item-info {
+            flex-grow: 1;
+            padding: 0 15px;
+        }
+
+        .menu-item-info h3 {
+            margin: 0;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .menu-item-info p {
+            margin: 5px 0;
+            color: #666;
+        }
+
+        .menu-item-actions button {
+            background-color: #ffc107;
+            border: none;
+            padding: 10px 15px;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .menu-item-actions button:hover {
+            background-color: #e0a800;
+        }
+
+        .menu-item-actions .delete-btn {
+            background-color: #dc3545;
+            margin-left: 10px;
+        }
+
+        .menu-item-actions .delete-btn:hover {
+            background-color: #c82333;
+        }
+
+        .btn-edit {
+            background-color: #48e798; /* Green background */
+            color: white; /* White text */
+            padding: 10px 15px; /* Top/bottom and left/right padding */
+            border: none; /* No border */
+            border-radius: 5px; /* Rounded corners */
+            cursor: pointer; /* Pointer cursor on hover */
+            transition: background-color 0.3s, transform 0.2s; /* Transition effects */
+        }
+
+        .btn-edit:hover {
+            background-color: #45a049; /* Darker green on hover */
+            transform: scale(1.05); /* Slightly enlarge the button */
+        }
+
+        .btn-edit:focus {
+            outline: none; /* Remove default focus outline */
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Add a subtle shadow */
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .modal-content input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .modal-content button {
+            padding: 10px;
+            background-color: #48e798;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .modal-content button:hover {
+            background-color: #218838;
+        }
+    </style>
+  <nav class="navbar">
+        <h1 class="logo">CafeMenu</h1>
+        <div class="hamburger" id="hamburger" onclick="toggleNav()">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="admin.html">Admin</a></li>
+        </ul>
+    </nav>
+    <h1>Admin Panel</h1>
+
+    <!-- Admin Form and Items List -->
+    <form id="item-form" enctype="multipart/form-data">
+        <input type="hidden" id="item-id" value="">
+        
+        <label for="item-name">Item Name:</label>
+        <input type="text" id="item-name" required>
+
+        <label for="item-price">Price:</label>
+        <input type="number" id="item-price" required>
+
+        <label for="item-image">Upload Image:</label>
+        <input type="file" id="item-image" accept="image/*">
+
+        <button type="submit">Add Item</button>
+    </form>
+
+    <h2>Existing Menu Items</h2>
+    <div id="items-list">
+        <!-- Menu items will be dynamically loaded here -->
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <h2>Login</h2>
+            <label for="username">Username:</label>
+            <input type="text" id="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" required>
+
+            <button id="login-btn">Login</button>
+        </div>
+    </div>
+<script>
+    // Check if the user is logged in when the page loads
+document.addEventListener('DOMContentLoaded', function () {
+    const loginModal = document.getElementById('login-modal');
+    
+    // Check localStorage for login status
+    if (!localStorage.getItem('loggedIn')) {
+        loginModal.style.display = 'flex'; // Show login modal if not logged in
+    }
+
+    // Handle login
+    document.getElementById('login-btn').addEventListener('click', function () {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        // Check hardcoded credentials (you can replace with dynamic check)
+        if (username === 'admin' && password === 'password123') {
+            localStorage.setItem('loggedIn', true); // Save login status
+            loginModal.style.display = 'none'; // Hide modal after login
+        } else {
+            alert('Invalid credentials!');
+        }
+    });
+});
+
+// Add a logout function if necessary
+function logout() {
+    localStorage.removeItem('loggedIn');
+    window.location.reload();
+}
+function toggleNav() {
+    const navLinks = document.querySelector('.nav-links');
+    const hamburger = document.getElementById('hamburger');
+    navLinks.classList.toggle('active');
+    hamburger.classList.toggle('change'); // Toggle the change class for the cross effect
+}
+</script>
+    <script src="admin.js"></script>
+</body>
+</html>

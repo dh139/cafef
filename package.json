@@ -1,0 +1,27 @@
+{
+  "name": "cafe",
+  "version": "1.0.0",
+  "main": "index.js",
+  "engines": {
+    "node": "20.x"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.0",
+    "fs": "^0.0.1-security",
+    "html-pdf-node": "^1.0.8",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.15",
+    "pdfkit": "^0.15.0",
+    "puppeteer": "^23.4.1"
+  }
+}
